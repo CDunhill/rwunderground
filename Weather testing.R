@@ -1,20 +1,30 @@
 # https://github.com/ALShum/rwunderground
 # https://cran.r-project.org/web/packages/rwunderground/rwunderground.pdf
 
-# rwunderground::set_api_key("YOUR KEY")
+rwunderground::set_api_key("YOUR KEY")
 # Note: by default units are in imperial (temperature is F, windspeed in MPH etc.) -- sorry rest of the world!
 # To use metric, you can set use_metric = TRUE for many of the functions.
 
 library (rwunderground)
-set_location(territory = "GB", city = "London")
+location <- set_location(territory = "GB", city = "London")
 
 
 # History
-history(set_location(territory = "GB", city = "London"), date = 20170102, use_metric = TRUE)
+history(location, date = 20180102, use_metric = TRUE)
 
+# History Date Range
+history <- history_range(location, date_start="20171225", date_end="20171231", message=TRUE, use_metric = TRUE)
+View (history)
+
+#### NEED TO INSERT COLUMN FOR LOCATION INTO DATA WHEN MULTIPLE LOCATIONS ####
 
 # Forecast
-forecast10day(set_location(territory = "GB", city = "London"), use_metric = TRUE)
+lon_for_day <- forecast10day(location, use_metric = TRUE)
+lon_for_day
 
-lon_for <- hourly10day(set_location(territory = "GB", city = "London"), use_metric = TRUE)
-lon_for
+lon_for_hour <- hourly10day(location, use_metric = TRUE)
+lon_for_hour
+
+
+#### NEED TO INSERT COLUMN FOR LOCATION INTO DATA WHEN MULTIPLE LOCATIONS ####
+
